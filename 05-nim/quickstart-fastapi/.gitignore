@@ -1,0 +1,11 @@
+# secrets — the NGC key never goes in git
+.env
+.env.*
+!.env.example
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+uv.lock
+.ruff_cache/
