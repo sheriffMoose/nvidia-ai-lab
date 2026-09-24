@@ -84,19 +84,19 @@ flowchart BT
 One line per cell. Detail goes in §3.
 
 
-| Tech               | What it solves                                                                                                                        | Depends on                                                                       | Use when                                                                                                         | **Don't use when**                                                                                                               | Non-NVIDIA alternative                                                                                              |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| CUDA               | programming model to communicate with Nvidia GPU                                                                                      | Nvidia GPU and Drivers                                                           | LLM training and inference                                                                                       | Sequential, single-threaded operations or non-NVIDIA deployments                                                                 | ROCm/HIP, Metal, Triton-lang, WebGPU                                                                                |
-| CUDA-X             | suite of libraries designed to deliver industry-leading GPU acceleration across AI and high-performance computing use cases           | Nvidia GPU, CUDA Toolkit and Drivers                                             | Building high-throughput, low-latency AI and data processing pipelines over massive datasets                     | Handling lightweight, low-volume datasets that easily fit in single-core CPU memory, or running on non-NVIDIA hardware platforms | NetworkX, scikit-learn, NumPy, Apache Spark, Ray and PyTorch                                                        |
-| TensorRT           | ecosystem of tools for developers to achieve high-performance deep learning inference                                                 | `libcudart`, `cuDNN`, GPU/Drivers                                                | Deploying latency-critical, high-throughput deep learning inference                                              | Running inference on non-Nvidia hardware, Rapid iterative prototyping, Serving pure tabular ML models                            | ONNX Runtime, torch.compile, vLLM/SGLang, OpenVINO                                                                  |
-| TensorRT-LLM       | open-source library specifically built to compile, optimize, and serve Generative AI and Large Language Models (LLMs) on NVIDIA GPUs. | TensorRT, CUDA Driver/Toolkit, Python, `cuDNN`, `NCCL`, `MPI`                    | Deploying large-scale Transformer models to production on Nvidia hardware                                        | Deploying non-generative models, or working with non-Nvidia hardware, building quick Python-only prototypes                      | vLLM, SGLang, TGI, LMDeploy, Ollama                                                                                 |
-| Triton             | open source inference serving software that streamlines AI inferencing                                                                | GPU/Drivers/CUDA, Python/C++, model artifacts and `config.pbtxt`                 | High-throughput & low-latency requirements, Heterogeneous multi-framework stacks, Complex model pipelines        | Simple lightweight deployments, Python-native rapid prototyping, Strict CPU-only microservices                                   | KServe, TorchServe, Ray Serve, BentoML                                                                              |
-| Dynamo             | open-source inference framework for serving generative AI models                                                                      | engine backend (vLLM/SGLang/TensorRT-LLM), container platform (Kubernetes/Slurm) | Serving scalable LLMs with KV-cache-aware routing                                                                | Single-node/single-GPU setups                                                                                                    | KServe, Ray Serve, Triton, TGI, DynamoDB                                                                            |
-| NIM                | set of containerized microservices that facilitates the deployment and inference of pretrained models                                 | GPU/Drivers/CUDA, Docker/Kubernetes, TensorRT/TensorRT-LLM, vLLM/Triton          | Self-host/control AI inference infrastructure, Out-of-the-box optimization, Standard OpenAI-compatible endpoints | Using hosted SaaS LLM APIs, Non-Nvidia Hardware, Constrained small-scale non-commercial projects                                 | Open/Local: vLLM, Ollama, TGI, Triton, LocalAIManaged: AWS Bedrock, Vertex AI, Azure OpenAI, Anyscale, Together AI |
-| NeMo               |                                                                                                                                       |                                                                                  |                                                                                                                  |                                                                                                                                  |                                                                                                                     |
-| NeMo Agent Toolkit |                                                                                                                                       |                                                                                  |                                                                                                                  |                                                                                                                                  |                                                                                                                     |
-| RAPIDS             |                                                                                                                                       |                                                                                  |                                                                                                                  |                                                                                                                                  |                                                                                                                     |
-| Morpheus           |                                                                                                                                       |                                                                                  |                                                                                                                  |                                                                                                                                  |                                                                                                                     |
+| Tech               | What it solves                                                                                                                                           | Depends on                                                                       | Use when                                                                                                                                               | **Don't use when**                                                                                                               | Non-NVIDIA alternative                                                                                              |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| CUDA               | programming model to communicate with Nvidia GPU                                                                                                         | Nvidia GPU and Drivers                                                           | LLM training and inference                                                                                                                             | Sequential, single-threaded operations or non-NVIDIA deployments                                                                 | ROCm/HIP, Metal, Triton-lang, WebGPU                                                                                |
+| CUDA-X             | suite of libraries designed to deliver industry-leading GPU acceleration across AI and high-performance computing use cases                              | Nvidia GPU, CUDA Toolkit and Drivers                                             | Building high-throughput, low-latency AI and data processing pipelines over massive datasets                                                           | Handling lightweight, low-volume datasets that easily fit in single-core CPU memory, or running on non-NVIDIA hardware platforms | NetworkX, scikit-learn, NumPy, Apache Spark, Ray and PyTorch                                                        |
+| TensorRT           | ecosystem of tools for developers to achieve high-performance deep learning inference                                                                    | `libcudart`, `cuDNN`, GPU/Drivers                                                | Deploying latency-critical, high-throughput deep learning inference                                                                                    | Running inference on non-Nvidia hardware, Rapid iterative prototyping, Serving pure tabular ML models                            | ONNX Runtime, torch.compile, vLLM/SGLang, OpenVINO                                                                  |
+| TensorRT-LLM       | open-source library specifically built to compile, optimize, and serve Generative AI and Large Language Models (LLMs) on NVIDIA GPUs.                    | TensorRT, CUDA Driver/Toolkit, Python, `cuDNN`, `NCCL`, `MPI`                    | Deploying large-scale Transformer models to production on Nvidia hardware                                                                              | Deploying non-generative models, or working with non-Nvidia hardware, building quick Python-only prototypes                      | vLLM, SGLang, TGI, LMDeploy, Ollama                                                                                 |
+| Triton             | open source inference serving software that streamlines AI inferencing                                                                                   | GPU/Drivers/CUDA, Python/C++, model artifacts and `config.pbtxt`                 | High-throughput & low-latency requirements, Heterogeneous multi-framework stacks, Complex model pipelines                                              | Simple lightweight deployments, Python-native rapid prototyping, Strict CPU-only microservices                                   | KServe, TorchServe, Ray Serve, BentoML                                                                              |
+| Dynamo             | open-source inference framework for serving generative AI models                                                                                         | engine backend (vLLM/SGLang/TensorRT-LLM), container platform (Kubernetes/Slurm) | Serving scalable LLMs with KV-cache-aware routing                                                                                                      | Single-node/single-GPU setups                                                                                                    | KServe, Ray Serve, Triton, TGI, DynamoDB                                                                            |
+| NIM                | set of containerized microservices that facilitates the deployment and inference of pretrained models                                                    | GPU/Drivers/CUDA, Docker/Kubernetes, TensorRT/TensorRT-LLM, vLLM/Triton          | Self-host/control AI inference infrastructure, Out-of-the-box optimization, Standard OpenAI-compatible endpoints                                       | Using hosted SaaS LLM APIs, Non-Nvidia Hardware, Constrained small-scale non-commercial projects                                 | Open/Local: vLLM, Ollama, TGI, Triton, LocalAIManaged: AWS Bedrock, Vertex AI, Azure OpenAI, Anyscale, Together AI |
+| NeMo               | a modular software suite of APIs and libraries that help developers manage the AI agent lifecycle—building, deploying, and optimizing AI agents at scale | GPU/Drivers/CUDA, PyTorch, Megatron-LM Triton/NIM, Kubernetes/NVAIE              | Building large foundation models, High-throughput inference and low-latency safety controls, Integrated enterprise stack with commercial SLA via NVAIE | Single GPU and local workstation prototyping, Non-Nvidia hardware, Simple API Aggregation                                        | Hugging Face, DeepSpeed, LLama-Factory, LLama Guard, Guidance, Ray Data, Datatrove                                  |
+| NeMo Agent Toolkit | flexible, lightweight, and unifying library that allows you to easily connect existing enterprise agents to data sources and tools across any framework  | Python, Pydantic, Dask, FastAPI, MCP, A2A, OpenTelemtry/OpenInference, NIMs/LLMs | Single unified gateway for different agents frameworks, Standard enterprise middleware features, Capture step-by-step agent execution trajectories     | Standalone single-framework agent, Basic prompt tracing, Standard LLM observability                                              | LangSmith, LangFuse, LangGraph Server, Semantic Kernel                                                              |
+| RAPIDS             | open-source suite of GPU-accelerated software libraries created by NVIDIA to execute end-to-end data science                                             | GPU/Drivers/CUDA, Python, C++, Arrow/PyArrow                                     | Processing massive datasets, Requiring speedups for tabular transofrmations, Classical ML, Graph Operations                                            | Datasets under 100k-1M, CPU-native frameworks like pandas, Polars, DuckDB                                                        | pandas, Polars, DuckDB, Spark, scikit-learn, NetworkX                                                               |
+| Morpheus           | GPU-accelerated AI application framework designed for streaming cybersecurity and telemetry data processing                                              | RAPIDS (cuDf, cuML), Triton, Kafka/Flink, C++/Python                             | Ultra-High Throughput Telemetry:, GPU-Bound Analytics & Real-Time Inference, Digital Fingerprinting                                                    | Simple Rule-Based ETL, Massive Distributed Graph Algorithms, Non-GPU Environments                                                | Kafka/Flink, Ray Streaming, Databricks/Spark Streaming                                                              |
 
 
 ---
@@ -154,15 +154,15 @@ One line per cell. Detail goes in §3.
   - Calibration datasets (for quantization).
   - At runtime, it receives live input tensors directly in GPU memory buffers (`void*`).
 - **Outputs:**
-  - Platform-specific optimized plan/engine files  (`.plan` or `.engine`) (binary executables containing optimized GPU execution kernels, fused layers and allocated memory structures).
+  - Platform-specific optimized plan/engine files (`.plan` or `.engine`) (binary executables containing optimized GPU execution kernels, fused layers and allocated memory structures).
   - At runtime, outputs prediction tensors (logits, embeddings, or bounding boxes) directly into GPU memory buffers.
 - **When:** Deploying latency-critical, high-throughput deep learning inference workloads to production specifically on NVIDIA hardware across data centers, RTX PCs, automotive platforms, or edge devices.
 - **When-not:**
   - Running inference on non-NVIDIA hardware targets (such as AMD, Intel, or CPUs).
   - Rapid iterative prototyping where compilation overhead delays real-time debugging.
   - Serving pure tabular or classical machine learning models (like Random Forests or XGBoost) without neural network structures.
-- **Alternative(s):** 
-  - ONNX Runtime: Multi-platform execution engine supporting CPUs, AMD GPUs, and Apple Silicon, offering high cross-hardware portability.   
+- **Alternative(s):**
+  - ONNX Runtime: Multi-platform execution engine supporting CPUs, AMD GPUs, and Apple Silicon, offering high cross-hardware portability.
   - torch.compile: Native PyTorch JIT graph compiler for fast Pythonic model optimization without exporting models.
   - vLLM / SGLang: Specialized LLM serving engines optimized for high-throughput continuous batching and KV-cache management.
   - OpenVINO: Intel’s dedicated framework for optimizing deep learning models across Intel CPUs, GPUs, and NPUs.
@@ -175,7 +175,7 @@ One line per cell. Detail goes in §3.
 
 - **What:** open-source library that accelerates and optimizes inference performance of large language models (LLMs) on the NVIDIA AI platform with a simplified Python API.
 - **Depends on:** TensorRT, CUDA Driver/Toolkit, cuDNN, Python runtime, and communication libraries like NCCL or MPI for multi-GPU/multi-node tensor parallelism.
-- **What it adds over plain TensorRT:** 
+- **What it adds over plain TensorRT:**
   - Out-of-the-box LLM architecture support (Transformer blocks, RoPE)
   - High-level KV-cache management
   - Paged Attention
@@ -199,25 +199,25 @@ One line per cell. Detail goes in §3.
 
 **Docs:** [github.com/triton-inference-server/server](https://github.com/triton-inference-server/server) · **Source checked:** **2026-09-22**, version **2.72.0**
 
-- **What:**  open source inference serving software that enables teams to deploy any AI model from multiple deep learning and machine learning frameworks, including TensorRT, PyTorch, ONNX, OpenVINO, Python, RAPIDS FIL, and more.
+- **What:** open source inference serving software that enables teams to deploy any AI model from multiple deep learning and machine learning frameworks, including TensorRT, PyTorch, ONNX, OpenVINO, Python, RAPIDS FIL, and more.
 - **Depends on:** GPU/Drivers/CUDA, Python/C++, file-system-based storage repositories (S3, GCS, Azure Blob, local directory) containing model artifacts and `config.pbtxt`
 - **Backends it can host:**
   - Deep Learning: TensorRT, TensorRT-LLM, PyTorch, ONNX Runtime, OpenVINO, vLLM.
   - ML/Tabular: RAPIDS FIL (Forest Inference Library for XGBoost, LightGBM, Random Forest).
   - General Purpose / Orchestration: Python Backend (custom Python code), C++ / Custom backends, DALI (GPU-accelerated data pre-processing).
-- **When:** 
+- **When:**
   - Maximum hardware efficiency via dynamic batching, concurrent model execution and GPU memory sharing.
   - Serving models built across different framework
   - Native ensembling or Business Logic Scripting (BLS) to route data between pre-processors, embedding generators and ML classifiers directly on the server without extra network hops.
 - **When-not:**
   - Single-framework, microservice-style APIs where Triton’s complex model configuration files `config.pbtxt` and infrastructure overhead are overkill.
   - Apps with lightweight Python wrappers (like FastAPI) and don't require GPU batching or multi-model orchestration.
-- **Alternative(s):** 
+- **Alternative(s):**
   - KServe: Higher-level Kubernetes orchestration platform for model serving (note: KServe can use Triton as its underlying runtime container).
   - TorchServe: PyTorch-native model server designed specifically for PyTorch/TorchScript models.
   - Ray Serve: Python-first scalable model serving framework best suited for distributed Python execution and dynamic scaling across clusters.
   - BentoML: Python-first deployment tool focusing on packaging, containerizing, and orchestrating ML models with simple REST/gRPC endpoints.
-- **FinCrime angle:** 
+- **FinCrime angle:**
   - Single Endpoint Pipeline: Triton is ideal for Financial Crime (FinCrime) architectures that process high-frequency transaction data. You can expose a single gRPC/REST endpoint that triggers an Ensemble or Business Logic Scripting (BLS) pipeline.
   - Concrete Flow:
     - Pre-processing: Clean/format transaction attributes (via DALI or Python backend).
@@ -228,14 +228,14 @@ One line per cell. Detail goes in §3.
 
 ### 3.6 Dynamo
 
-**Docs:** [docs.nvidia.com/dynamo](https://docs.nvidia.com/dynamo) · **Source checked:** **2026-09-22**, version **__**
+**Docs:** [docs.nvidia.com/dynamo](https://docs.nvidia.com/dynamo) · **Source checked:** **2026-09-22**, version 
 
 - **What:** an open-source inference framework for serving generative AI models. It supports TensorRT-LLM, vLLM, SGLang. It also supports Nvidia, AMD and Intel hardware, can be run on Kubernetes, Slurm or locally.
 - **Depends on:** inference engine backend (vLLM, SGLang, or TensorRT-LLM) to perform the actual model execution, and container orchestration platforms like Kubernetes or Slurm.
 - **Scale at which it starts to matter:** High-concurrency or enterprise-scale AI serving clusters (typically multi-node deployments running high QPS workloads, massive context windows, or split prefill/decode disaggregated topologies where standard monolithic LLM serving becomes inefficient).
 - **When:** serving LLMs at scale in production and need KV-cache-aware intelligent request routing, disaggregated prefill/decode serving, cross-node cache management, and granular auto-scaling across heterogeneous clusters.
 - **When-not:** Single-node/single-GPU setups, small-scale deployments, low-throughput applications, or simple prototype applications where standard vLLM/SGLang Docker containers or lightweight API servers (like Ollama or LM Studio) are sufficient and introduce less operational complexity.
-- **Alternative(s):** 
+- **Alternative(s):**
   - Ray Serve (with vLLM/SGLang)
   - Triton Inference Server
   - TGI (Text Generation Inference)
@@ -252,11 +252,11 @@ One line per cell. Detail goes in §3.
 - **What:** a set of pre-packaged, containerized microservices designed to simplify and accelerate the production deployment of generative AI models (LLMs, vision, speech, biology/healthcare, etc.) on accelerated infrastructure.
 - **Depends on:** Container runtimes (Docker, Kubernetes/Helm), NVIDIA CUDA libraries, TensorRT / TensorRT-LLM, vLLM / Triton Inference Server, and host environments with compatible NVIDIA GPUs (cloud, on-prem DGX, or RTX workstations).
 - **API surface:** Standardized OpenAI-compatible HTTP/REST and gRPC APIs (e.g., `/v1/chat/completions`, `/v1/embeddings`), allowing developers to swap underlying backends with minimal code changes.
-- **Licensing / deployment model:** 
+- **Licensing / deployment model:**
   - Prototyping / Development: Free hosted endpoints via the NVIDIA API catalog or local development using NVIDIA Developer Program credits.
   - Production: Part of the commercial NVIDIA AI Enterprise subscription license (priced per GPU/socket/node), required for self-hosting in production environments.
   - Deployment Options: Fully portable across public clouds (AWS, GCP, Azure), on-prem data centers, Kubernetes clusters, DGX Cloud, and local RTX PCs.
-- **When:** 
+- **When:**
   - You need to self-host or control AI inference infrastructure on-premises or in private clouds for data privacy, compliance, or low-latency SLAs.
   - You want out-of-the-box optimization (throughput, latency, memory usage) for open/custom models without manually tuning Triton, TensorRT, or CUDA dependencies.
   - You want standard OpenAI-compatible endpoints to seamlessly integrate with existing orchestration tools (LangChain, LlamaIndex, enterprise microservices).
@@ -275,59 +275,110 @@ One line per cell. Detail goes in §3.
 
 ### 3.8 NeMo
 
-**Docs:** [docs.nvidia.com/nemo](https://docs.nvidia.com/nemo/) · **Source checked:** **2026-09-22**, version **__**
+**Docs:** [docs.nvidia.com/nemo](https://docs.nvidia.com/nemo/) · **Source checked:** **2026-09-22**, version **26.02**
 
-- **What:**
+- **What:** is a modular, enterprise-grade software platform and open-source framework designed for the end-to-end development, customization, guardrailing, and deployment of generative AI models (LLMs, vision-language models, and speech/audio).
 - **Depends on:**
-- **Sub-components I need to know:** *(Framework, Curator, Guardrails, Retriever, Customizer, Evaluator — which are real and current?)*
+  - Hardware: NVIDIA GPUs (Ampere, Hopper, Blackwell architectures) with CUDA ecosystem support.
+  - Core Libraries & Orchestration: PyTorch, PyTorch Lightning, Megatron-LM (for distributed multi-GPU/multi-node training), and Triton Inference Server / NVIDIA NIM (for production serving).
+  - Enterprise Requirements: Kubernetes / NVIDIA AI Enterprise (NVAIE) license for full containerized NeMo Microservices features.
+- **Sub-components I need to know:**
+  - NeMo Framework: The underlying open-source Python framework for pre-training and fine-tuning multi-billion parameter models across distributed GPU nodes.
+  - NeMo Curator: GPU-accelerated microservice/library for raw data extraction, cleaning, deduplication, and quality filtering.
+  - NeMo Guardrails: Programmable safety layer using `Colang` to filter prompt injections, hallucinations, toxic content, and maintain topical boundaries.
+  - NeMo Retriever: Accelerated microservices for Enterprise RAG (document ingestion, parsing, chunking, and high-throughput vector embedding search).
+  - NeMo Customizer: Microservice specializing in parameter-efficient fine-tuning (`PEFT`/`LoRA`), `SFT`, and alignment (`RLHF`/`DPO`).
+  - NeMo Evaluator: Automated benchmark suite (`MMLU`, `GSM8K`, `LLM-as-a-judge`, custom domain metrics) to validate models post-fine-tuning.
 - **When:**
+  - You are building or customizing large foundation models on multi-GPU or multi-node infrastructure.
+  - High-throughput inference and low-latency safety controls are critical requirements.
+  - You need an integrated enterprise stack (data preparation -> fine-tuning -> evaluation -> guardrails) with commercial SLA/support via NVIDIA AI Enterprise.
 - **When-not:**
-- **Alternative(s):** *(e.g. Hugging Face TRL/PEFT, Axolotl, Unsloth; Guardrails AI)*
-- **FinCrime angle:** *(guardrails, PII, model-risk / SR 11-7)*
+  - Single-GPU / Local Workstation prototyping: Lightweight OSS stacks are faster to setup and carry significantly lower overhead.
+  - Non-NVIDIA Hardware: It is heavily optimized for CUDA; running on AMD (ROCm), Apple Silicon, or TPUs is impractical or unsupported.
+  - Simple API Aggregation: If you only need to call external APIs (e.g., OpenAI, Anthropic) without hosting or fine-tuning models yourself.
+- **Alternative(s):**
+  - Training & Fine-tuning: Hugging Face (TRL/PEFT), Axolotl, Unsloth, DeepSpeed, LLaMA-Factory.
+  - Guardrails & Safety: Guardrails AI, Llama Guard, Guidance (Microsoft), NeMo Guardrails (can be used standalone).
+  - Data Processing: Ray Data, Datatrove (Hugging Face).
+- **FinCrime angle:**
+  - Guardrails: Prevents model manipulation or prompt injections trying to bypass anti-money laundering (AML) controls or extract restricted compliance logic.
+  - PII & Data Leakage: NeMo Safe Synthesizer and Curator mask/replace sensitive tabular customer data (SSNs, account numbers) and control model context output to satisfy privacy compliance.
+  - Model Risk / SR 11-7: NeMo Evaluator and NeMo Auditor enable reproducible benchmarks, bias auditing, and model tracking. This provides the audit trails, validation metrics, and governance docs required by OCC/Federal Reserve SR 11-7 model risk management guidance.
 - **Lab week:** `06-nemo-finetuning`
 
 ### 3.9 NeMo Agent Toolkit
 
-**Docs:** [docs.nvidia.com/nemo/agent-toolkit](https://docs.nvidia.com/nemo/agent-toolkit/latest/index.html) · **Source checked:** **2026-09-22**, version **__**
+**Docs:** [docs.nvidia.com/nemo/agent-toolkit](https://docs.nvidia.com/nemo/agent-toolkit/latest/index.html) · **Source checked:** **2026-09-22**, version **1.8**
 
-- **What:**
+- **What:** a flexible, lightweight, and unifying library designed to connect, coordinate, observe, and optimize enterprise AI agents, tools, and data sources across different agentic frameworks.
 - **Depends on:**
-- **Is it an agent framework or a layer around one?**
-- **How it relates to my Google ADK platform:**
+  - Core: Python runtime, Pydantic, Dask (for async job execution), FastAPI (for server/REST endpoints).
+  - Protocols & Integrations: Model Context Protocol (MCP), Agent-to-Agent protocol (A2A), OpenTelemetry / OpenInference for tracing.
+  - LLMs/Hardware: Works with NVIDIA NIMs/local LLMs as well as third-party providers (OpenAI, AWS Bedrock, OCI).
+- **Is it an agent framework or a layer around one?** It is primarily a layer around agent frameworks. While it includes built-in reference agent implementations (such as ReAct, ReWOO, and Router agents), its core value is acting as an orchestration, integration, and middleware layer that wraps, connects, and standardizes workflows built on external frameworks (e.g., LangGraph, AutoGen, Agno/Phidata, Google ADK).
+- **How it relates to my Google ADK platform:** NeMo Agent Toolkit provides an explicit ADK integration plugin (`nat.plugins.adk`).
+  - Wrapper/Bridge: It wraps Google ADK agents and tools, translating native ADK execution calls and tool wrappers into NAT's standardized schema.
+  - Standardized Infrastructure: Allows you to run ADK-built agents through NAT's FastAPI frontend, expose them via MCP/A2A servers, and apply NAT's middleware (caching, timeout handling, authentication/identity resolution) without rewriting your core ADK agent logic.
+  - Unified Observability & Optimization: Connects Google ADK agents directly into NAT’s unified telemetry pipeline (OpenTelemetry), dataset generators, and fine-tuning harness (`nat.finetuning`).
 - **When:**
+  - You already have agents written in different frameworks (e.g., Google ADK, LangGraph, AutoGen) and need a single, unified gateway or orchestration layer to expose them via standardized APIs (REST, MCP, A2A).
+  - You need standard enterprise middleware features (user identity resolution, OAuth2/token storage, rate-limiting, dynamic tool registration) across all agent workflows.
+  - You want to capture step-by-step agent execution trajectories to evaluate, profile, or fine-tune lower-level models (using NAT’s Test-Time Compute or DPO fine-tuning harnesses).
 - **When-not:**
-- **Alternative(s):** *(e.g. LangSmith, Langfuse, Arize Phoenix for observability/eval)*
-- **FinCrime angle:** *(audit trail of agent decisions)*
+  - You are building a standalone, single-framework agent entirely inside Google ADK or LangGraph and do not need multi-framework interoperability or standardized middleware servers.
+  - You only need basic prompt tracing or standard LLM observability without relying on NeMo's trajectory-based evaluation and fine-tuning pipelines.
+- **Alternative(s):**
+  - Observability & Trajectory Tracing: LangSmith, Langfuse, Arize Phoenix, Weights & Biases Weave.
+  - Agent Interoperability & Gateway Wrappers: AutoGen Studio, LangGraph Server, Semantic Kernel.
+- **FinCrime angle:**
+  - Comprehensive Execution Trajectories: Captures structured step-by-step trajectories (including user context, planner reasoning, tool inputs, API paylod responses, and final actions) via standardized OpenTelemetry spans.
+  - Immutable Audit Trail: Provides the detailed provenance required by financial compliance teams to explain why an agent made a decision (e.g., flagging a transaction, filing a SAR, or approving an override).
+  - Contextual Redaction: Features built-in PII/PHI redaction processors (`nat.observability.processor.redaction`) to scrub sensitive financial data, SSNs, or account numbers from execution logs before they are written to long-term storage or telemetry pipelines.
 - **Lab week:** `07-nemo-agent-toolkit`
 
 ### 3.10 RAPIDS
 
-**Docs:** [rapids.ai](https://rapids.ai/) · **Source checked:** **2026-09-22**, version **__**
+**Docs:** [rapids.ai](https://rapids.ai/) · **Source checked:** **2026-09-22**
 
-- **What:**
-- **Depends on:**
+- **What:** open-source suite of GPU-accelerated software libraries created by NVIDIA to execute end-to-end data science, analytics, and machine learning pipelines entirely on GPUs using familiar Python APIs.
+- **Depends on:** NVIDIA GPUs (Pascal architecture or newer), CUDA, C++, and Arrow/PyArrow memory layouts.
 - **cuDF / cuML / cuGraph — one line each:**
-- **When:**
-- **When-not:** *(data size below which pandas/Polars wins)*
-- **Alternative(s):** pandas · Polars · DuckDB · Spark · scikit-learn · NetworkX
-- **FinCrime angle:** *(transaction graphs, entity resolution)*
+  - cuDF: A GPU-accelerated DataFrame library featuring zero-code-change drop-in acceleration for pandas and integration with `Polars` and `Spark`.
+  - cuML: A library providing GPU-accelerated implementations of classical machine learning algorithms and estimators mirroring the `scikit-learn` API.
+  - cuGraph: A high-performance graph analytics library that integrates seamlessly with `NetworkX` to process large-scale graph structures on GPUs.
+- **When:** processing massive datasets (millions to billions of rows) that bottleneck CPU memory/compute, requiring speedups for tabular transformations, classical ML, or graph operations.
+- **When-not:** Datasets under ~100k–1 million rows or a few hundred megabytes, where GPU memory transfer overhead outweighs compute acceleration and CPU-native frameworks like pandas, Polars, or DuckDB run faster.
+- **Alternative(s):** `pandas`, `Polars`, `DuckDB`, `Spark`, `scikit-learn`, `NetworkX`
+- **FinCrime angle:** Rapidly constructs massive transaction graphs across millions of accounts to detect money laundering rings, shell company structures, and fraud schemes via parallelized community detection and centrality algorithms (`cuGraph`), paired with fast fuzzy string matching and behavioral feature extraction for entity resolution (`cuDF`).
 - **Lab week:** `08-rapids`
 
 ### 3.11 Morpheus
 
-**Docs:** [docs.nvidia.com/morpheus](https://docs.nvidia.com/morpheus/) · **Source checked:** **2026-09-22**, version **__**
+**Docs:** [docs.nvidia.com/morpheus](https://docs.nvidia.com/morpheus/) · **Source checked:** **2026-09-22**, version **25.06**
 
-- **What:**
-- **Depends on:** *(RAPIDS? Triton? Kafka?)*
-- **Project status check:** *(active, maintenance, or superseded by a Blueprint? verify)*
-- **When:**
+- **What:** open, GPU-accelerated AI application framework designed for streaming cybersecurity and telemetry data processing. Built around C++ and Python pipeline primitives, it allows security teams to construct real-time, high-throughput pipelines for tasks like log parsing, anomaly detection, digital fingerprinting, and LLM-driven vulnerability analysis.
+- **Depends on:**
+  - RAPIDS (cuDF, cuML): Provides GPU-accelerated DataFrame manipulations and machine learning tools directly within the pipeline stages.
+  - Triton Inference Server: Handles multi-model inference execution, providing dynamic batching and resource pooling for models embedded in the stream.
+  - Apache Kafka / Flink (Integration Level): Morpheus supports native Kafka source/sink stages for ingesting and publishing streaming messages. It relies on Kafka for message transport, rather than acting as a full streaming cluster itself.  
+  - C++Backend / Python Front End: Uses Pybind11 to offer high-level Python pipeline construction backed by C++ pipeline execution for low-latency throughput.
+- **When:** 
+  - Ultra-High Throughput Telemetry: Analyzing raw network traffic, PCAP data, or millions of log lines/sec (e.g., via DOCA integration on BlueField DPUs).
+  - GPU-Bound Analytics & Real-Time Inference: Pipelines where feature extraction or deep learning (BERT, Graph Neural Networks, LLMs) must run on live data streams with sub-second latency.
+  - Digital Fingerprinting (DFP): Generating individual risk models for every user/entity in an enterprise across large windowed datasets.
 - **When-not:**
-- **Alternative(s):** *(e.g. Kafka Streams / Flink + a model server)*
-- **FinCrime angle:** Fraud Detection Pipeline example — what does it actually do?
+  - Simple Rule-Based ETL: Standard text processing or simple alerting tasks that can easily be handled on CPUs with minimal compute requirements.
+  - Massive Distributed Graph Algorithms: Batch graph traversals or graph algorithms that require distributed multi-node CPU clusters rather than streaming GPU pipeline execution.
+  - Non-GPU Environments: Deployments lacking NVIDIA GPU acceleration (while Morpheus offers a CPU-only mode, it strips away its core performance advantages).
+- **Alternative(s):**
+  - Kafka Streams / Apache Flink + Model Server (Triton / TorchServe): The traditional enterprise stack for real-time streaming ETL paired with RPC calls to an external inference endpoint.
+  - Ray Streaming + Ray Serve: Python-native distributed task and model serving stream framework.
+  - Databricks Structured Streaming / Spark Streaming: Popular for CPU/distributed enterprise batch and streaming pipelines.
+- **FinCrime angle:** The GNN Fraud Detection Pipeline in Morpheus targets credit card and bank transfer fraud by capturing network topology instead of evaluating transactions in isolation.   
 - **Lab week:** `09-morpheus-fraud`
 
 ---
-
 
 ## 4. Done when
 
